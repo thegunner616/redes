@@ -1,0 +1,149 @@
+trabajadores = [] 
+ 
+def crear_trabajador(): 
+
+    validar = True
+    while validar:
+        nombre = input("Ingrese el Nombre del trabajador: ")
+        if nombre != "":
+            validar = False
+        else:
+            print("El campo nombre no puede estar vacio")
+    
+
+    apellido = input("Ingrese el apellido del trabajador: ")
+    validar = True
+    while validar:
+        if apellido != "":
+            validar = False
+        else:
+            apellido = input("El campo apellido no puede estar vacio: ")
+
+
+    rut = input("Ingrese el rut del trabajador sin puntos ni guion: ")
+    validar = True 
+    while validar:
+        if rut != "":
+            validar = False
+        else:
+            rut = input("El campo rut no puede estar vacio: ")
+
+    fecha_nacimiento = input("Ingrese la fecha de nacimiento: ")
+    validar = True
+    while validar:
+        if fecha_nacimiento != "":
+            validar = False
+        else:
+            fecha_nacimiento = input("El campo Fecha de nacimiento no puede estar vacio: ")
+    
+    id_mayor =  max(item["ID"] for item in trabajadores)+1 if (len(trabajadores) > 0) else 1
+
+    trabajadores.append({
+        "ID": id_mayor ,
+        "Nombre":nombre ,
+        "Apellido":apellido ,
+        "Rut": rut ,
+        "Fecha nacimiento":fecha_nacimiento
+    })
+
+    print("Datos guardados correctamente.")
+
+
+def listar_trabajadores(): 
+
+    print("     Lista de trabajadores       ")
+
+    for item_trabadadores in trabajadores:
+
+        print("-----------------------------------------------------")
+        print(f"ID: {item_trabadadores['ID']}")
+        print(f"Nombre completo: {item_trabadadores['Nombre']} {item_trabadadores['Apellido']}")
+        print(f"Rut : {item_trabadadores['Rut']}     Fecha De nacimiento: {item_trabadadores['Fecha nacimiento']}")
+        print("-----------------------------------------------------")
+
+        
+ 
+def buscar_trabajador(): 
+
+    id_buscar = int(input("Ingrese el ID del trabajador: "))
+
+    for trabajador in trabajadores:
+
+        if trabajador["ID"] == id_buscar:
+
+            print("-----------------------------------------------------")
+            print(f"ID: {trabajador['ID']}")
+            print(f"Nombre completo: {trabajador['Nombre']} {trabajador['Apellido']}")
+            print(f"Rut : {trabajador['Rut']}")
+            print(f"Fecha De nacimiento: {trabajador['Fecha nacimiento']}")
+            print("-----------------------------------------------------")
+
+ 
+ 
+def modificar_trabajador(): 
+
+    id_modificar = int(input("Ingrese el ID del trabajador a modificar: "))
+
+    for trabajador in trabajadores:
+
+        if trabajador["ID"] == id_modificar:
+
+            trabajador["Nombre"] = input("Ingrese el nuevo nombre: ")
+            trabajador["Apellido"] = input("Ingrese el nuevo apellido: ")
+            trabajador["Rut"] = input("Ingrese el nuevo rut: ")
+            trabajador["Fecha nacimiento"] = input("Ingrese la nueva fecha de nacimiento: ")
+
+            print("Trabajador modificado correctamente.")
+ 
+ 
+def eliminar_trabajador(): 
+
+    id_eliminar = int(input("Ingrese el ID del trabajador a eliminar: "))
+
+    for trabajador in trabajadores:
+
+        if trabajador["ID"] == id_eliminar:
+
+            confirmar = input("¿Seguro que desea eliminar el trabajador? (s/n): ")
+
+            if confirmar == "s":
+
+                trabajadores.remove(trabajador)
+
+                print("Trabajador eliminado correctamente.")
+            else:
+                print("Eliminación cancelada.")
+ 
+ 
+while True: 
+ 
+    print("\n--- MANTENEDOR ---") 
+    print("1. Crear") 
+    print("2. Listar") 
+    print("3. Buscar") 
+    print("4. Modificar") 
+    print("5. Eliminar") 
+    print("6. Salir") 
+ 
+    opcion = input("Seleccione: ") 
+ 
+    if opcion == "1": 
+        crear_trabajador() 
+ 
+    elif opcion == "2": 
+        listar_trabajadores() 
+ 
+    elif opcion == "3": 
+        buscar_trabajador() 
+ 
+    elif opcion == "4": 
+        modificar_trabajador() 
+ 
+    elif opcion == "5": 
+        eliminar_trabajador() 
+ 
+    elif opcion == "6": 
+        break 
+ 
+    else: 
+        print("Opción inválida")
